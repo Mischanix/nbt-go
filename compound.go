@@ -51,20 +51,27 @@ func (self *tagCompound) Each(f func(name string, child TagData) bool) {
 	}
 }
 
-func (self *tagCompound) Path(pathString string) TagData {
-	for name, child := range self.children {
-		if len(pathString) >= len(name) && pathString[:len(name)] == name {
-			if len(pathString) > len(name) && pathString[len(name):][0] == '/' {
-				if child.Type() != Compound {
-					panic(&childNotACompoundError{name, pathString})
-				}
-				return child.Compound().Path(pathString[len(name)+1:])
+func (self *tagCompound) Path(pathString string) (result TagData) {
+	self.Each(func(name string, child TagData) bool {
+		if pathString == name {
+			result = child
+		} else if len(pathString) > len(name) && // Avoid slice size panics
+			// pathString == {name}/...
+			pathString[:len(name)] == name && pathString[len(name):][0] == '/' {
+
+			if child.Type() != Compound {
+				panic(&childNotACompoundError{name, pathString})
 			} else {
-				return child
+				result = child.Compound().Path(pathString[len(name)+1:])
 			}
 		}
+		return result == nil
+	})
+	if result != nil {
+		return result
+	} else {
+		panic(&childNotFoundError{"Path", pathString})
 	}
-	panic(&childNotFoundError{"Path", pathString})
 }
 
 func (self *tagCompound) Set(name string, payload interface{}) error {
