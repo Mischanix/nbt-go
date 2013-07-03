@@ -4,7 +4,7 @@ Go interfaces for reading, modifying, and writing Named Binary Tag format data
 
 Read the API:  [nbt.go](https://github.com/mischanix/nbt-go/blob/master/nbt.go)
 
-[GoDoc](http://godoc.org/github.com/mischanix/nbt-go)
+[GoDoc](http://godoc.org/github.com/Mischanix/nbt-go)
 
 ## Example
 
