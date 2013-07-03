@@ -1,8 +1,7 @@
 // Package nbt provides an interface for reading, modifying, and writing
 // Named Binary Tag (NBT) data atop Go streams.  Many methods in nbt will
-// cause runtime panics if an invalid state occurs in favor of returning
-// a meaningless nil and having that nil cause a runtime panic by being
-// dereferenced elsewhere.
+// cause runtime panics in favor of returning a meaningless nil and having
+// that nil cause a runtime panic by being dereferenced elsewhere.
 package nbt
 
 import (
