@@ -50,7 +50,7 @@ func write(w io.Writer, value interface{}) error {
 func readByteArray(rd io.Reader) (result []byte) {
 	if length := readInt(rd); length > 0 {
 		bytes := make([]byte, length)
-		binary.Read(rd, byteOrder, bytes)
+		io.ReadFull(rd, bytes)
 		return bytes
 	} else {
 		return []byte{}
