@@ -59,7 +59,8 @@ func readByteArray(rd io.Reader) (result []byte) {
 
 func writeByteArray(w io.Writer, value []byte) error {
 	write(w, int32(len(value)))
-	return write(w, value)
+	_, err := w.Write(value)
+	return err
 }
 
 func readString(rd io.Reader) string {
