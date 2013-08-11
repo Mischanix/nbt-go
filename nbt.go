@@ -9,12 +9,12 @@ import (
 	"io"
 )
 
-type TagType int8
+type TagType byte
 
 const (
 	// Marks the end of a Compound.
 	End TagType = iota
-	// int8
+	// byte
 	Byte
 	// int16
 	Short
@@ -38,7 +38,7 @@ const (
 	IntArray
 
 	numTags int     = iota
-	invalid TagType = -1
+	invalid TagType = iota
 )
 
 type Tag interface {
@@ -55,13 +55,13 @@ type Tag interface {
 // TagType.
 type TagData interface {
 	Tag
-	Byte() int8
+	Byte() byte
 	Short() int16
 	Int() int32
 	Long() int64
 	Float() float32
 	Double() float64
-	ByteArray() []int8
+	ByteArray() []byte
 	StringData() string
 	List() TagList
 	Compound() TagCompound

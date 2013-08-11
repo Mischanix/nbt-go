@@ -103,8 +103,8 @@ func (self *tagData) asValue(tagType TagType) (result r.Value) {
 	return r.ValueOf(self.data)
 }
 
-func (self *tagData) Byte() int8 {
-	return int8(self.asValue(Byte).Int())
+func (self *tagData) Byte() byte {
+	return byte(self.asValue(Byte).Int())
 }
 
 func (self *tagData) Short() int16 {
@@ -127,8 +127,8 @@ func (self *tagData) Double() float64 {
 	return float64(self.asValue(Double).Float())
 }
 
-func (self *tagData) ByteArray() []int8 {
-	return (self.asValue(ByteArray).Interface()).([]int8)
+func (self *tagData) ByteArray() []byte {
+	return (self.asValue(ByteArray).Interface()).([]byte)
 }
 
 func (self *tagData) StringData() string {
@@ -148,13 +148,13 @@ func (self *tagData) IntArray() []int32 {
 }
 
 var typeMap = map[r.Type]TagType{
-	r.TypeOf(int8(0)):        Byte,
+	r.TypeOf(byte(0)):        Byte,
 	r.TypeOf(int16(0)):       Short,
 	r.TypeOf(int32(0)):       Int,
 	r.TypeOf(int64(0)):       Long,
 	r.TypeOf(float32(0)):     Float,
 	r.TypeOf(float64(0)):     Double,
-	r.TypeOf([]int8{}):       ByteArray,
+	r.TypeOf([]byte{}):       ByteArray,
 	r.TypeOf(""):             String,
 	r.TypeOf(&tagList{}):     List,
 	r.TypeOf(&tagCompound{}): Compound,

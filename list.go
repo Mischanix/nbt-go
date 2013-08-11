@@ -37,7 +37,7 @@ func loadTagList(rd io.Reader, t *tagData) {
 }
 
 func saveTagList(w io.Writer, l TagList) error {
-	if err := write(w, int8(l.ListType())); err != nil {
+	if err := write(w, byte(l.ListType())); err != nil {
 		return err
 	}
 	if err := write(w, l.Length()); err != nil {

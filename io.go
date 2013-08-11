@@ -13,7 +13,7 @@ func read(rd io.Reader, value interface{}) {
 	binary.Read(rd, byteOrder, value)
 }
 
-func readByte(rd io.Reader) (result int8) {
+func readByte(rd io.Reader) (result byte) {
 	read(rd, &result)
 	return result
 }
@@ -47,17 +47,17 @@ func write(w io.Writer, value interface{}) error {
 	return binary.Write(w, byteOrder, value)
 }
 
-func readByteArray(rd io.Reader) (result []int8) {
+func readByteArray(rd io.Reader) (result []byte) {
 	if length := readInt(rd); length > 0 {
-		bytes := make([]int8, length)
-		binary.Read(rd, byteOrder, &bytes)
+		bytes := make([]byte, length)
+		binary.Read(rd, byteOrder, bytes)
 		return bytes
 	} else {
-		return []int8{}
+		return []byte{}
 	}
 }
 
-func writeByteArray(w io.Writer, value []int8) error {
+func writeByteArray(w io.Writer, value []byte) error {
 	write(w, int32(len(value)))
 	return write(w, value)
 }
@@ -65,7 +65,7 @@ func writeByteArray(w io.Writer, value []int8) error {
 func readString(rd io.Reader) string {
 	if length := readShort(rd); length > 0 {
 		bytes := make([]byte, length)
-		binary.Read(rd, byteOrder, &bytes)
+		binary.Read(rd, byteOrder, bytes)
 		return string(bytes)
 	} else {
 		return ""
@@ -80,7 +80,7 @@ func writeString(w io.Writer, value string) error {
 func readIntArray(rd io.Reader) (result []int32) {
 	if length := readInt(rd); length > 0 {
 		ints := make([]int32, length)
-		binary.Read(rd, byteOrder, &ints)
+		binary.Read(rd, byteOrder, ints)
 		return ints
 	} else {
 		return []int32{}

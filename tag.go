@@ -38,7 +38,7 @@ func loadNamedTag(rd io.Reader, parent *tagData) *tag {
 }
 
 func saveNamedTag(w io.Writer, t Tag) error {
-	if err := write(w, int8(t.Type())); err != nil {
+	if err := write(w, byte(t.Type())); err != nil {
 		return err
 	}
 	return writeString(w, t.Name())
