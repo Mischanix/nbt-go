@@ -104,7 +104,7 @@ func (self *tagData) asValue(tagType TagType) (result r.Value) {
 }
 
 func (self *tagData) Byte() byte {
-	return byte(self.asValue(Byte).Int())
+	return byte(self.asValue(Byte).Uint())
 }
 
 func (self *tagData) Short() int16 {
